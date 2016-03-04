@@ -15,6 +15,6 @@ class Uuid_Version4Controller extends Uuid_Controller
 
     function handleInvalidExtraParameters()
     {
-        throw new \Exception("UUID v4 does not require any parameter.");
+        abort(self::HTTP_STATUS_CODE_BAD_REQUEST, "UUID v4 does not require any parameter.");
     }
 }
