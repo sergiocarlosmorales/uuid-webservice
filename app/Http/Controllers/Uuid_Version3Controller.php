@@ -23,11 +23,11 @@ class Uuid_Version3Controller extends NameSpacedUuid_Controller
 
     public function handleInsufficientParameters()
     {
-        throw new \Exception("UUID v3 requires a name space and string.");
+        abort(self::HTTP_STATUS_CODE_BAD_REQUEST, "UUID v3 requires a name space and string.");
     }
 
     function handleInvalidExtraParameters()
     {
-        throw new \Exception("UUID v3 only requires a name space and string.");
+        abort(self::HTTP_STATUS_CODE_BAD_REQUEST, "UUID v3 only requires a name space and string.");
     }
 }

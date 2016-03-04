@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use Ramsey\Uuid\Uuid;
 
-class NameSpacedUuid_Controller extends Controller
+class NameSpacedUuid_Controller extends Uuid_Controller
 {
     const NS_DNS = 'dns';
     const NS_OID = 'oid';
