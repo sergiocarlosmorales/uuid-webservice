@@ -1,31 +1,26 @@
 <?php
+Route::group(['middleware' => ['api']], function () {
+    Route::get('1', 'Uuid_Version1Controller@get');
+    Route::get('1/{whatever}', 'Uuid_Version1Controller@handleInvalidExtraParameters')->where(['whatever' => '.*']);
 
-/*
-|--------------------------------------------------------------------------
-| Routes File
-|--------------------------------------------------------------------------
-|
-| Here is where you will register all of the routes in an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
+    Route::get('3', 'Uuid_Version3Controller@handleInsufficientParameters')->where(['whatever' => '.*']);
+    Route::get('3/{nameSpace}/{value}', 'Uuid_Version3Controller@get');
+    Route::get(
+        '3/{nameSpace}/{value}/{whatever}',
+        'Uuid_Version3Controller@handleInvalidExtraParameters'
+    )->where(['whatever' => '.*']);
+    Route::get('3/{whatever}', 'Uuid_Version3Controller@handleInsufficientParameters')->where(['whatever' => '.*']);
 
-Route::get('/', function () {
-    return view('welcome');
-});
+    Route::get('4', 'Uuid_Version4Controller@get');
+    Route::get('4/{whatever}', 'Uuid_Version4Controller@handleInvalidExtraParameters')->where(['whatever' => '.*']);
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| This route group applies the "web" middleware group to every route
-| it contains. The "web" middleware group is defined in your HTTP
-| kernel and includes session state, CSRF protection, and more.
-|
-*/
+    Route::get('5', 'Uuid_Version5Controller@handleInsufficientParameters')->where(['whatever' => '.*']);
+    Route::get('5/{nameSpace}/{value}', 'Uuid_Version5Controller@get');
+    Route::get(
+        '5/{nameSpace}/{value}/{whatever}',
+        'Uuid_Version5Controller@handleInvalidExtraParameters'
+    )->where(['whatever' => '.*']);
+    Route::get('5/{whatever}', 'Uuid_Version5Controller@handleInsufficientParameters')->where(['whatever' => '.*']);
 
-Route::group(['middleware' => ['web']], function () {
-    //
+    Route::get('', 'Uuid_Version5Controller@get');
 });
