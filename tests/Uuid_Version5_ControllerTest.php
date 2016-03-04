@@ -15,7 +15,7 @@ class Uuid_Version5_ControllerTest extends TestCase
     }
 
     /**
-     * @return string[]
+     * @return array
      */
     public function getValidPaths()
     {
@@ -59,7 +59,7 @@ class Uuid_Version5_ControllerTest extends TestCase
     }
 
     /**
-     * @return string[]
+     * @return array
      */
     public function getPathsWithInsufficientParameters()
     {
@@ -105,7 +105,7 @@ class Uuid_Version5_ControllerTest extends TestCase
     }
 
     /**
-     * @return string[]
+     * @return array
      */
     public function getPathsWithExtraParameters()
     {
@@ -118,6 +118,45 @@ class Uuid_Version5_ControllerTest extends TestCase
         }
 
         return $paths;
+    }
+
+    /**
+     * @dataProvider getPathsWithInvalidNameSpace
+     * @param string $path
+     */
+    public function testInvalidNameSpace($path)
+    {
+        $exceptionThrownFlag = false;
+
+        try {
+            $this->visit($path);
+        } catch (TestingHttpException $e) {
+            $exceptionThrownFlag = true;
+            /* @var HttpKernelException */
+            $previousException = $e->getPrevious();
+            $this->assertContains(
+                'Invalid name space',
+                $previousException->getMessage()
+            );
+            $this->assertInstanceOf(
+                HttpKernelException::class,
+                $previousException
+            );
+            $this->assertEquals(400, $previousException->getStatusCode());
+        }
+
+        $this->assertTrue($exceptionThrownFlag, 'HTTP exception thrown check.');
+    }
+
+    /**
+     * @return array
+     */
+    public function getPathsWithInvalidNameSpace()
+    {
+        return [
+            ["/5/YOLO/s"],
+            ["/5/BBQ/s"],
+        ];
     }
 
     public function getValidNameSpaces()

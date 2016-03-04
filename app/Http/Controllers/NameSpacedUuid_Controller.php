@@ -13,7 +13,10 @@ class NameSpacedUuid_Controller extends Uuid_Controller
     protected function handleInvalidNameSpace($nameSpace)
     {
         $validNameSpaces = implode(", ", $this->getValidNameSpaces());
-        throw new \Exception("Invalid name space: '$nameSpace', valid values are: {$validNameSpaces}.");
+        abort(
+            self::HTTP_STATUS_CODE_BAD_REQUEST,
+            "Invalid name space: '$nameSpace', valid values are: {$validNameSpaces}."
+        );
     }
 
     /**
