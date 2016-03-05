@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-abstract class UnNameSpacedUuid_Controller extends Uuid_Controller
+abstract class UnNamedSpacedUuid_Controller extends Uuid_Controller
 {
     /**
      * @return string

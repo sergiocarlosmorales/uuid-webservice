@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use Ramsey\Uuid\Uuid;
 
-class Uuid_Version4Controller extends UnNameSpacedUuid_Controller
+class Uuid_Version4Controller extends UnNamedSpacedUuid_Controller
 {
     /**
      * @return int
