@@ -11,4 +11,12 @@ class InvalidUuid_VersionController extends Controller
             "Invalid UUID version requested: '$version'."
         );
     }
+
+    public function unsupportedVersion()
+    {
+        abort(
+            self::HTTP_STATUS_CODE_NOT_IMPLEMENTED,
+            "UUID version not supported."
+        );
+    }
 }

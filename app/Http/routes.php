@@ -10,6 +10,12 @@ Route::group(['middleware' => ['api']], function () {
         'Uuid_Version1Controller@handleInvalidExtraParameters'
     )->where([$wildCardRouteParameter => $wildCardRouteRegex]);
 
+    Route::get('2', 'InvalidUuid_VersionController@unsupportedVersion');
+    Route::get(
+        "2/{{$wildCardRouteParameter}}",
+        'InvalidUuid_VersionController@unsupportedVersion'
+    )->where([$wildCardRouteParameter => $wildCardRouteRegex]);
+
     // UUIDv3.
     Route::get('3', 'Uuid_Version3Controller@handleInsufficientParameters');
     Route::get('3/{nameSpace}/{value}', 'Uuid_Version3Controller@get');
