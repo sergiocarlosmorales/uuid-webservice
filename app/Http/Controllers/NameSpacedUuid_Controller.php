@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 
 use Ramsey\Uuid\Uuid;
 
-class NameSpacedUuid_Controller extends Uuid_Controller
+abstract class NameSpacedUuid_Controller extends Uuid_Controller
 {
     const NS_DNS = 'dns';
     const NS_OID = 'oid';
@@ -50,5 +50,20 @@ class NameSpacedUuid_Controller extends Uuid_Controller
             self::NS_URL,
             self::NS_X500
         ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getInvalidExtraParametersMessage()
+    {
+        $uuidVersionNumber = $this->getUuidVersionNumber();
+        return "UUID v{$uuidVersionNumber} only requires a name space and string.";
+    }
+
+    protected function handleInsufficientParameters()
+    {
+        $uuidVersionNumber = $this->getUuidVersionNumber();
+        abort(self::HTTP_STATUS_CODE_BAD_REQUEST, "UUID v{$uuidVersionNumber} requires a name space and string.");
     }
 }

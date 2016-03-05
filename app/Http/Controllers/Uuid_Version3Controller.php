@@ -6,6 +6,14 @@ use Ramsey\Uuid\Uuid;
 class Uuid_Version3Controller extends NameSpacedUuid_Controller
 {
     /**
+     * @return int
+     */
+    public function getUuidVersionNumber()
+    {
+        return 3;
+    }
+
+    /**
      * @param string $requestedNameSpace
      * @param string $requestedValue
      * @return string
@@ -19,15 +27,5 @@ class Uuid_Version3Controller extends NameSpacedUuid_Controller
         }
 
         return Uuid::uuid3($nameSpace, $requestedValue)->toString();
-    }
-
-    public function handleInsufficientParameters()
-    {
-        abort(self::HTTP_STATUS_CODE_BAD_REQUEST, "UUID v3 requires a name space and string.");
-    }
-
-    function handleInvalidExtraParameters()
-    {
-        abort(self::HTTP_STATUS_CODE_BAD_REQUEST, "UUID v3 only requires a name space and string.");
     }
 }
