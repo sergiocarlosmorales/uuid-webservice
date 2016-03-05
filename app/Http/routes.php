@@ -41,5 +41,8 @@ Route::group(['middleware' => ['api']], function () {
         'Uuid_Version5Controller@handleInsufficientParameters'
     )->where([$wildCardRouteParameter => $wildCardRouteRegex]);
 
-    Route::get('', 'Uuid_Version5Controller@get');
+    Route::any(
+        "{{$wildCardRouteParameter}}",
+        ['uses' => 'InvalidUuid_VersionController@invalidUuidVersion']
+    )->where($wildCardRouteParameter, $wildCardRouteRegex);
 });

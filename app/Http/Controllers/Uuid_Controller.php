@@ -3,8 +3,6 @@ namespace App\Http\Controllers;
 
 abstract class Uuid_Controller extends Controller
 {
-    const HTTP_STATUS_CODE_BAD_REQUEST = 400;
-
     /**
      * @return int
      */
