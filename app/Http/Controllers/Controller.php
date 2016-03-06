@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
     const HTTP_STATUS_CODE_BAD_REQUEST = 400;
     const HTTP_STATUS_CODE_NOT_IMPLEMENTED = 501;
 }
